@@ -1,5 +1,5 @@
 package warehouseOrderTrackingSystem;
 
-public class product {
+public class Product {
 
 }
