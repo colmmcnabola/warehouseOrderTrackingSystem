@@ -28,7 +28,7 @@ public class GUI extends JFrame {
 	private JPanel orderPanel;
 	private JPanel productPanel;
 	private JTextArea productList;
-	
+	private JButton backToHome;
 	
 	public GUI(){
 		prepareGUI();
@@ -88,6 +88,8 @@ public class GUI extends JFrame {
 	}
 	
 	private void mainMenu(){
+
+		
 		//header label for the home screen
 		headerLabel.setText("Warehouse Order Tracking System");
 		
@@ -137,7 +139,14 @@ public class GUI extends JFrame {
 				break;
 			case "Exit":
 				break;
-			
+			case "Home":
+				productList.setVisible(false);
+				backToHome.setVisible(false);
+				productPanel.remove(productList);
+				productPanel.remove(backToHome);
+				
+				mainMenu();
+				break;
 			}
 		}
 	}
@@ -178,11 +187,16 @@ public class GUI extends JFrame {
 		
 		productList.setText(output);
 		productList.revalidate();
-		JButton backToHome = new JButton ("Home");
+		
+		
+		//Creation of a button going back to home
+		backToHome = new JButton ("Home");
 		backToHome.setActionCommand("Home");
 		backToHome.addActionListener(new BCL());
 		backToHome.setFont(new Font("Calibri Light", Font.PLAIN, 35));
-		customerPanel.add(backToHome);
+		productPanel.add(backToHome);
+		backToHome.setVisible(true);
+		
 		mainFrame.revalidate();
 	}
 }
