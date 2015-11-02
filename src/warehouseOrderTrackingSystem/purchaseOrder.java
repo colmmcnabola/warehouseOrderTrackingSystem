@@ -47,7 +47,7 @@ public class purchaseOrder implements Comparable <purchaseOrder> {
 	
 	public void setCheckedOut (String checkedOut){
 		this.checkedOut = checkedOut;
-		}
+	}
 	
 	
 

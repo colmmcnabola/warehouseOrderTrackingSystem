@@ -3,28 +3,28 @@ package warehouseOrderTrackingSystem;
 public class Product implements Comparable <Product> {
 	
 	//Default Variables of the product
-	private int idproduct;
+	private int productId;
 	private String productName;
 	private String productDesc;
 	private String productLoc;
 	private int productQuantRemain;
 	
 	//Default constructor for a new product
-	public Product (int idproduct, String productName, String productDesc, String productLoc, int productQuantRemain){
-		this.idproduct = idproduct;
+	public Product (int productid, String productName, String productDesc, int productQuantRemain, String productLoc){
+		this.productId = productid;
 		this.productName = productName;
 		this.productDesc = productDesc;
-		this.productLoc = productLoc;
 		this.productQuantRemain = productQuantRemain;
+		this.productLoc = productLoc;
 	}
 	
 	//Get and Set Methods
-	public int getIdproduct (){
-		return idproduct;
+	public int getproductId (){
+		return productId;
 	}
 	
-	public void setIdProduct (int idproduct){
-		this.idproduct = idproduct;
+	public void setProductId (int productid){
+		this.productId = productid;
 	}
 	
 	public String getProductName (){
@@ -40,7 +40,7 @@ public class Product implements Comparable <Product> {
 	}
 	
 	public void setProductDesc(String productDesc){
-		this.productName = productDesc;
+		this.productDesc = productDesc;
 	}
 	
 	public String getProductLoc (){
@@ -48,15 +48,15 @@ public class Product implements Comparable <Product> {
 	}
 	
 	public void setProductLoc(String productLoc){
-		this.productName = productLoc;
+		this.productLoc = productLoc;
 	}
 	
 	public int getProductQuantRemain (){
 		return productQuantRemain;
 	}
 	
-	public void setProductQuantRemain(String productQuantRemain){
-		this.productName = productQuantRemain;
+	public void setProductQuantRemain(int QTY){
+		this.productQuantRemain = QTY;
 	}
 
 	@Override

@@ -39,9 +39,6 @@ public class purchaseOrderLine implements Comparable <purchaseOrderLine>{
 		this.quantity = quantity;
 	}
 	
-	
-	
-	
 	@Override
 	public int compareTo(purchaseOrderLine o) {
 		// TODO Auto-generated method stub

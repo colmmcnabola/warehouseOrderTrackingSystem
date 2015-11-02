@@ -1,5 +1,7 @@
 package warehouseOrderTrackingSystem;
 
+import java.util.ArrayList;
+
 public class customerOrderLine implements Comparable <customerOrderLine>{
 	
 	//default variables 
@@ -37,6 +39,7 @@ public class customerOrderLine implements Comparable <customerOrderLine>{
 		public void setQuantity (int quantity){
 			this.quantity = quantity;
 		}
+
 
 		@Override
 		public int compareTo(customerOrderLine o) {

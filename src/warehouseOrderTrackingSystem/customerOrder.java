@@ -7,7 +7,7 @@ public class customerOrder implements Comparable <customerOrder>{
 		private String employeeWorking;
 		private String checkedOut;
 		
-		public customerOrder (int customerId, String customerName, String employeeWorking, String checkedout){
+		public customerOrder (int customerId, String customerName, String employeeWorking, String checkedOut){
 			this.customerId = customerId;
 			this.customerName = customerName;
 			this.employeeWorking = employeeWorking;
@@ -19,7 +19,7 @@ public class customerOrder implements Comparable <customerOrder>{
 			return customerId;
 		}
 		
-		public void setCustomerId (int orderId){
+		public void setCustomerId (int customerId){
 			this.customerId = customerId;
 		}
 		
@@ -47,7 +47,11 @@ public class customerOrder implements Comparable <customerOrder>{
 			this.checkedOut = checkedOut;
 		}
 		
-		
+		public String [] getProductList(String id){
+			String [] productDetails = new String[5];	
+			
+			return productDetails;
+		}
 		@Override
 		public int compareTo(customerOrder o) {
 			// TODO Auto-generated method stub
