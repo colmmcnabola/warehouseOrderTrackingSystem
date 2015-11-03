@@ -355,14 +355,14 @@ public class databaseConnection {
 				  }
 				  System.out.println("Goodbye!");
 	}
-	
+	//code to create a purchase order of new stock 
 	public void createPurchaseOrder(String sql){
 		getConnection();
 		try{
 			System.out.println("Inserting Records Into The dase .... ");
 			stmt = conn.createStatement();
 			System.out.println(sql);
-			stmt.executeQuery(sql);
+			stmt.executeUpdate(sql);
 			System.out.println("Inserted Records Into the Database!");
 			} catch (Exception e) {
 				 e.printStackTrace();
@@ -385,7 +385,7 @@ public class databaseConnection {
 	//selecting all the columns in from the supplier ordertable in an arraylist. 
 	public ArrayList<purchaseOrderLine> readPurchaseOrderByID (int purchaseOrderID){
 		ArrayList<purchaseOrderLine> listOfOrders = new ArrayList<purchaseOrderLine>();
-		String readPurchase = "SELECT * FROM purchaseorderline WHERE purchaseOrderID = " +purchaseOrderID; 
+		String readPurchase = "SELECT * FROM purchaseorderline WHERE purchaseorderlineid = " +purchaseOrderID; 
 		getConnection();
 		ResultSet rsPurchase;
 		try{

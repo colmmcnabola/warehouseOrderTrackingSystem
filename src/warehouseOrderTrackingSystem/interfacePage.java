@@ -166,15 +166,15 @@ import java.util.Scanner;
 			int purchaseOrderId = scanner.nextInt();
 			
 			System.out.println("Please Enter The Purchase Order Name: ");
-			String purchaseOrderName = scanner.toString();
+			String purchaseOrderName = scanner.nextLine();
 			
 			System.out.println("Please Enter The Name Of The Employee Working: ");
-			String employeeWorking = scanner.toString();
+			String employeeWorking = scanner.nextLine();
 			
 			System.out.println("Has This Product Been Checked Out? ");
-			String checkedOut = scanner.toString();
+			String checkedOut = scanner.nextLine();
 			
-			String sql = "INSERT INTO purchaseorder (purchaseOrderId, purchaseOrderName, employeeWorking, checkedOut) VALUES ("+purchaseOrderId+", '"+purchaseOrderName+"', '"+employeeWorking+"' ,'"+checkedOut+")";
+			String sql = "INSERT INTO purchaseorder (purchaseOrderId, purchaseOrderName, employeeWorking, checkedOut) VALUES ("+ purchaseOrderId +", '"+purchaseOrderName+"', '"+employeeWorking+"' ,'"+checkedOut+"')";
 			dbconnect.createPurchaseOrder(sql); 
 			newPurchaseOrderLine();
 		}
@@ -224,7 +224,7 @@ import java.util.Scanner;
 			choice = Integer.parseInt(scanner.nextLine()); 
 			switch (choice){
 				case 1:
-				databaseConnection.readAllProducts();
+				databaseConnection.readFromDatabaseProduct();
 				break;
 				case 2: System.out.println("You have now been returned to the user menu");
 				userMenu(null);
@@ -367,7 +367,9 @@ import java.util.Scanner;
 			int choice = scanner.nextInt();
 			ArrayList <purchaseOrderLine> listOfOrders = dbconnect.readPurchaseOrderByID (choice);
 			for (int i = 0; i <listOfOrders.size(); i++){
-				System.out.println("Purchase ID: " + listOfOrders.get(i).getPurchaseOrderLineId() + ". \t Product Name: " +listOfOrders.get(i).getProductName() + ". \t Quantity: " +listOfOrders.get(i).getQuantity());
+				System.out.println("Purchase ID: " + listOfOrders.get(i).getPurchaseOrderLineId() + 
+						". \t Product Name: " +listOfOrders.get(i).getProductName() + 
+						". \t Quantity: " +listOfOrders.get(i).getQuantity());
 			}
 		}
 		
@@ -377,7 +379,9 @@ import java.util.Scanner;
 			int choice = scanner.nextInt();
 			ArrayList <customerOrderLine> listOfOrders = dbconnect.readCustomerOrderByID (choice);
 			for (int i = 0; i <listOfOrders.size(); i++){
-				System.out.println("Purchase ID: " + listOfOrders.get(i).getCustomerId() + ". \t Product Name: " +listOfOrders.get(i).getProductName() + ". \t Quantity: " +listOfOrders.get(i).getQuantity());
+				System.out.println("Purchase ID: " + listOfOrders.get(i).getCustomerId() + 
+						". \t Product Name: " +listOfOrders.get(i).getProductName() + 
+						". \t Quantity: " +listOfOrders.get(i).getQuantity());
 			}
 		}
 		
@@ -386,7 +390,10 @@ import java.util.Scanner;
 			System.out.println("Please Enter The Number Of The Order You Wish To View");
 			ArrayList <Product> listOfOrders = dbconnect.readStock ();
 			for (int i = 0; i <listOfOrders.size(); i++){
-				System.out.println("Product Name: " + listOfOrders.get(i).getProductName() + ". \t Product Description: " +listOfOrders.get(i).getProductDesc() + ". \t Quantity: " +listOfOrders.get(i).getProductQuantRemain() + ". \t Location: " + listOfOrders.get(i).getProductLoc());
+				System.out.println("Product Name: " + listOfOrders.get(i).getProductName() + 
+						". \t Product Description: " +listOfOrders.get(i).getProductDesc() + 
+						". \t Quantity: " +listOfOrders.get(i).getProductQuantRemain() + 
+						". \t Location: " + listOfOrders.get(i).getProductLoc());
 			}
 			deleteProduct();
 		}
