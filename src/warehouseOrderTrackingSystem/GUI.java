@@ -28,7 +28,12 @@ public class GUI extends JFrame {
 	private JPanel orderPanel;
 	private JPanel productPanel;
 	private JTextArea productList;
+	private JTextArea customerList;
 	private JButton backToHome;
+	private JButton backToHomeOrders;
+	
+	// ADDED BY MATT: The current screen attached to the JFrame
+	private JPanel currentScreen;
 	
 	public GUI(){
 		prepareGUI();
@@ -64,10 +69,7 @@ public class GUI extends JFrame {
 		
 		controlPanel = new JPanel (); 
 		controlPanel.setLayout(new FlowLayout());
-		
-		mainFrame.add(headerLabel);
-		mainFrame.add(controlPanel);
-		
+	
 		//creating of a customer panel and setting of the size 
 		customerPanel = new JPanel();
 		customerPanel.setLayout(new GridLayout(2,4));
@@ -88,7 +90,15 @@ public class GUI extends JFrame {
 	}
 	
 	private void mainMenu(){
-
+		
+		// ADDED BY MATT
+		/*MainMenuScreen mainMenu = new MainMenuScreen(mainFrame);
+		currentScreen = mainMenu;
+		mainFrame.add(mainMenu);
+		mainFrame.revalidate();*/
+		
+		mainFrame.add(headerLabel);
+		mainFrame.add(controlPanel);
 		
 		//header label for the home screen
 		headerLabel.setText("Warehouse Order Tracking System");
@@ -111,7 +121,7 @@ public class GUI extends JFrame {
 		createNewOrderButton.addActionListener(new BCL());
 		viewOrdersButton.addActionListener(new BCL());
 		viewProductsButton.addActionListener(new BCL());
-		exitMainMenuButton.addActionListener(new BCL());
+		exitMainMenuButton.addActionListener(new CloseListener());
 		
 		controlPanel.add(createNewCustOrderButton);
 		controlPanel.add(createNewOrderButton);
@@ -119,7 +129,13 @@ public class GUI extends JFrame {
 		controlPanel.add(viewProductsButton);
 		controlPanel.add(exitMainMenuButton);
 		mainFrame.setVisible(true);
-		
+	}
+	//the performing of when the exit button is called on the main menu
+	private class CloseListener implements ActionListener{
+		@Override 
+		public void actionPerformed(ActionEvent e){
+			System.exit(0);
+		}
 	}
 	
 	private class BCL implements ActionListener{
@@ -131,7 +147,7 @@ public class GUI extends JFrame {
 				break;
 			case "Stock Orders":
 				break;
-			case "Current Orders":
+			case "View Current Orders":
 				currentOrders();
 				break;
 			case "Products":
@@ -144,24 +160,53 @@ public class GUI extends JFrame {
 				backToHome.setVisible(false);
 				productPanel.remove(productList);
 				productPanel.remove(backToHome);
-				
 				mainMenu();
 				break;
+			case "Back To Home":
+				customerList.setVisible(false);
+				backToHomeOrders.setVisible(false);
+				customerPanel.remove(customerList);
+				customerPanel.remove(backToHomeOrders);
+				mainMenu();
 			}
 		}
 	}
+	
+	
 	private void currentOrders(){
 		mainFrame.remove(controlPanel);
 		mainFrame.remove(stockPanel);
 		mainFrame.remove(orderPanel);
 		mainFrame.remove(productPanel);
+		
+		customerList = new JTextArea ();
+		
+		customerPanel.add(customerList);
 		mainFrame.add(customerPanel);
-		
-		
 		headerLabel.setText("Current Orders");
 		
-	}
-	
+		ArrayList<customerOrder> customerOrder =  databaseConnection.readAllCustomerOrders();
+		
+		//output of the array
+		String output = "\n";
+		for (int i = 0; i<customerOrder.size(); i++){
+			output += customerOrder.get(i).getCustomerId() + "\t" + customerOrder.get(i).getCustomerName() + "\t" + customerOrder.get(i).getEmployeeWorking() + "\t" + customerOrder.get(i).getCheckedOut() + "\n" ;	
+		}
+		
+		customerList.setText(output);
+		customerList.revalidate();
+		//Creation of a button going back to home
+		backToHomeOrders = new JButton ("Back To Home");
+		backToHomeOrders.setActionCommand("Back To Home");
+		backToHomeOrders.addActionListener(new BCL());
+		backToHomeOrders.setFont(new Font("Calibri Light", Font.PLAIN, 35));
+		
+		customerPanel.add(backToHomeOrders);
+		backToHomeOrders.setVisible(true);
+			
+		mainFrame.revalidate();
+}
+
 	private void viewProducts (){
 		mainFrame.remove(controlPanel);
 		mainFrame.remove(stockPanel);
@@ -175,14 +220,13 @@ public class GUI extends JFrame {
 		
 		headerLabel.setText("Current Products");
 		
-		
 		// Get all products from array and display to GUI
 		ArrayList<Product> products = databaseConnection.readAllProducts();
 		
+		//Output of the connection to the database.
 		String output = "\n";
-		
 		for(int i = 0; i < products.size(); i++){
-			output += products.get(i).getproductId() + "\t" +products.get(i).getProductName() + "\t\t" +products.get(i).getProductLoc() + "\t\t" +products.get(i).getProductQuantRemain() + "\n" ;
+			output += products.get(i).getproductId() + "\t\t          " +products.get(i).getProductName() + "\t\t\t" +products.get(i).getProductLoc() + "\t\t" +products.get(i).getProductQuantRemain() + "\n" ;
 		}
 		
 		productList.setText(output);
@@ -194,6 +238,10 @@ public class GUI extends JFrame {
 		backToHome.setActionCommand("Home");
 		backToHome.addActionListener(new BCL());
 		backToHome.setFont(new Font("Calibri Light", Font.PLAIN, 35));
+		
+		// ADDED BY MATT: Remove the current screen from the JFrame before adding a new one
+		//mainFrame.remove(currentScreen);
+		
 		productPanel.add(backToHome);
 		backToHome.setVisible(true);
 		

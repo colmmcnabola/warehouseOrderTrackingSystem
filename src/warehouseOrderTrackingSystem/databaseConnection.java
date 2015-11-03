@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class databaseConnection {
 
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost/warehourseordertrackingsystem";
+	static final String DB_URL = "jdbc:mysql://10.50.15.3/warehourseordertrackingsystem";
 	static final String USER = "root";
 	static final String PASS = "colm1990";
 	
@@ -156,7 +156,7 @@ public class databaseConnection {
 	}
 	
 	//arraylist with all of the details from the customer order line table. 
-	public ArrayList<customerOrder> readAllCustomerOrders(){
+	public static ArrayList<customerOrder> readAllCustomerOrders(){
 		ArrayList<customerOrder> listOfCustomerOrders = new ArrayList<customerOrder>();
 		String readCustomer = "SELECT * FROM customerorder";
 		getConnection();
