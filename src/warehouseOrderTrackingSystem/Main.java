@@ -2,10 +2,7 @@ package warehouseOrderTrackingSystem;
 
 
 
-public class main {
-	public main (){
-		
-	}
+public class Main {
 	
 	public static void main ( String [] args ){
 		interfacePage ip = new interfacePage();
