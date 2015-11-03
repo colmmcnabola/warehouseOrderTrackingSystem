@@ -5,6 +5,9 @@ package warehouseOrderTrackingSystem;
 public class main {
 	
 	public static void main ( String [] args ){
+		GUI sd = new GUI();
+		sd.mainMenu();
+		
 		interfacePage ip = new interfacePage();
 		warehouseWorkerDetails Daniel = new warehouseWorkerDetails ("daniel", "abc", "daniel", "dos santos");
 		warehouseWorkerDetails Colm = new warehouseWorkerDetails("colm", "abc", "colm", "mcnabola");

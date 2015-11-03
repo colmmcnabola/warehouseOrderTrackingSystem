@@ -38,11 +38,7 @@ public class GUI extends JFrame {
 	public GUI(){
 		prepareGUI();
 	}
-	
-	public static void main (String [] args){
-		GUI sd = new GUI();
-		sd.mainMenu();
-	}			
+			
 	
 	//setting of the GUI size and layout
 	private void prepareGUI(){
@@ -89,7 +85,7 @@ public class GUI extends JFrame {
 		mainFrame.setVisible(true);
 	}
 	
-	private void mainMenu(){
+	protected void mainMenu(){
 		
 		// ADDED BY MATT
 		/*MainMenuScreen mainMenu = new MainMenuScreen(mainFrame);
